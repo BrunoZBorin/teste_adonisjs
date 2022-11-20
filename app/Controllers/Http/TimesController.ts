@@ -6,7 +6,8 @@ export default class TimesController {
 
     public async store({request, response}:HttpContextContract){
         const body = request.body()
-
+        console.log(body)
+        // const time = await Time.create({country:body.country, continent:body.continent, grupo_id: body.group_id })
         const time = await Time.create(body)
 
         response.status(201)
