@@ -3,7 +3,6 @@ import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Grupo from './Grupo'
 
 export default class Time extends BaseModel {
-
   
   @column({columnName:'grupo_id'})
   public grupo_id: number
@@ -21,7 +20,6 @@ export default class Time extends BaseModel {
 
   @column()
   public continent: string
-
 
   @column()
   public points: number

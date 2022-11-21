@@ -8,5 +8,6 @@ Route.group(()=>{
   Route.resource('/grupos', 'GruposController').apiOnly();
   Route.resource('/partidas', 'PartidasController').apiOnly();
   Route.get('/partidasPrimeiraFase', 'PartidasController.buscaPartidaFaseGrupo')
+  Route.get('/listaSomenteIdCountry', 'TimesController.listaSomenteIdCountry')
 }).prefix('/api')
 

@@ -6,8 +6,7 @@ export default class TimesController {
 
     public async store({request, response}:HttpContextContract){
         const body = request.body()
-        console.log(body)
-        // const time = await Time.create({country:body.country, continent:body.continent, grupo_id: body.group_id })
+        
         const time = await Time.create(body)
 
         response.status(201)
@@ -59,6 +58,25 @@ export default class TimesController {
         return{
             message:"Time alterado com sucesso",
             data:time
+        }
+    }
+
+    public async listaSomenteIdCountry(){
+
+        const times = await Time.all()
+
+        let novoArray: Array<object> = [];
+        for(var i in times)
+        {
+            let objAux = {
+                id:times[i].id,
+                country:times[i].country
+            }
+            novoArray[i] = objAux
+        }
+
+        return{
+            novoArray
         }
     }
 }

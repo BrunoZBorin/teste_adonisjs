@@ -7,8 +7,7 @@ export default class PartidasController {
 
     public async store({request, response}:HttpContextContract){
         const body = request.body()
-        console.log(body)
-        // const time = await Partida.create({country:body.country, continent:body.continent, grupo_id: body.group_id })
+        
         const partida = await Partida.create(body)
 
         response.status(201)
@@ -52,8 +51,11 @@ export default class PartidasController {
         const body = request.body()
 
         const partida = await Partida.findOrFail(params.id)
-        // partida.country = body.country;
-        // partida.continent = body.continent;
+
+        partida.goals_team_a = body.goals_team_a
+        partida.goals_team_b = body.goals_team_b
+        partida.cards_team_a = body.cards_team_a
+        partida.cards_team_b = body.cards_team_b
         
         await partida.save()
 
@@ -65,18 +67,11 @@ export default class PartidasController {
 
     public async buscaPartidaFaseGrupo(){
 
-        // const partida = await Partida.select('p.id, timeA.name, timeB.name')
-        //                             .from('partidas as p')
-        //                             .leftOuterJoin('times as timeA', 'times.id', 'partidas.time_a')
-        //                             .leftOuterJoin('times as timeB', 'times.id', 'partidas.time_b')
-        //                             .where('p.tipo', 'faseGrupos')
-
         const partida = await Database.from('partidas as p')
                                     .leftOuterJoin('times as timeA', 'p.team_a', '=','timeA.id')
                                     .leftOuterJoin('times as timeB', 'p.team_b', '=','timeB.id')
                                     .select('p.id', 'timeA.country as PaisA', 'timeB.country  as PaisB')
                                     .where('p.tipo', 'faseGrupos')
-
         return{
             data:partida
         }
