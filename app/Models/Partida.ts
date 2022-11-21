@@ -21,12 +21,6 @@ export default class Partida extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  // @column()
-  // public team_a: number
-  
-  // @column()
-  // public team_b: number
-
   @column()
   public goals_team_a: number
 
